@@ -1,8 +1,10 @@
-{
+require('dotenv').config();
+
+module.exports = {
   "development": {
     "username": "postgres",
     "password": null,
-    "database": "new_store_development",
+    "database": "bq_database",
     "host": "db",
     "dialect": "postgres",
     "operatorsAliases": false
@@ -10,17 +12,20 @@
   "test": {
     "username": "root",
     "password": null,
-    "database": "database_test",
+    "database": "bq_database_test",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": process.env.DB_USER,
+    "password": process.env.DB_PASS,
+    "database": process.env.DB_DATABASE,
+    "host": process.env.DB_HOST,
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "dialectOptions": {
+      "ssl": true
+    }
   }
 }
